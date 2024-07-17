@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import { getMovieById } from "../helpers/movies-api";
 import { Puff } from "react-loader-spinner";
 
@@ -54,12 +54,16 @@ export default function MovieDetailsPage() {
       </div>
       <ul>
         <li>
-          <Link>Reviews</Link>
+          <Link to={"reviews"}>Reviews</Link>
         </li>
         <li>
-          <Link>Casts</Link>
+          <Link to={"cast"}>Cast</Link>
         </li>
       </ul>
+
+      <Suspense fallback={<Puff />}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 }
